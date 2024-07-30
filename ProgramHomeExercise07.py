@@ -55,28 +55,24 @@ capital_list: list[str] = [
 
 import random
 size: int = len(capital_list);
-city_name: str = capital_list[random.randint(0, size)];
+city_name: str = capital_list[random.randint(0, size)].lower();
 city_name_display: str = ''.join(['-' if char == ' ' else '_' for char in city_name]);
-print(city_name);
 
 while True:
-    if city_name_display == city_name.replace(" ", "-"):
+    if city_name_display.lower() == city_name.replace(" ", "-"):
         print("WINNER");
         break;
 
-    temp: str = city_name.lower();
     letter: str = input("Please guess a letter of the city name: ").lower();
     city_name_list: list[str] = list(city_name_display);
-    count_letter: int = temp.count(letter);
-    count: int = 0;
+    last_letter: any = len(city_name) - 1 - city_name[::-1].index(letter) if letter in city_name else 0;
 
-    if letter in temp:
-        for i in range(len(temp)):
-            if temp[i] == letter:
-                city_name_list[i] = letter.upper() if temp[i - 1] == " " or i == 0 else letter;
+    if letter in city_name:
+        for i in range(len(city_name)):
+            if city_name[i] == letter:
+                city_name_list[i] = letter.upper() if city_name[i - 1] == " " or i == 0 else letter;
                 city_name_display = "".join(city_name_list);
-                count += 1;
-                if count == count_letter:
+                if i == last_letter:
                     print(city_name_display);
                 else:
                     continue;
