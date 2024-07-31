@@ -55,10 +55,12 @@ capital_list: list[str] = [
 
 import random
 size: int = len(capital_list);
-city_name: str = capital_list[random.randint(0, size)].lower();
+city_name: str = capital_list[random.randint(0, size - 1)].lower();
 city_name_display: str = ''.join(['-' if char == ' ' else '_' for char in city_name]);
+counter: int = 0;
 
 while True:
+
     if city_name_display.lower() == city_name.replace(" ", "-"):
         print("WINNER");
         break;
@@ -79,3 +81,5 @@ while True:
 
     else:
         print("letter does not exist in capital");
+    counter += 1
+print(f"The number of guess attempts are: {counter}");                    
